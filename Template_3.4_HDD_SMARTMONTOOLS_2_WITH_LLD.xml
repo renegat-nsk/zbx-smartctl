@@ -224,7 +224,7 @@
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description/>
+                            <description>This item has regexp preprocessing to catch both Device model: and Vendor+Product for SAS disks.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -236,8 +236,12 @@
                             <preprocessing>
                                 <step>
                                     <type>5</type>
-                                    <params>[Dd]evice [Mm]odel: +(.+)
-\1</params>
+                                    <params>(Vendor: +(.+)\nProduct:|[Dd]evice [Mm]odel:) +(.+)
+\2 \3</params>
+                                </step>
+                                <step>
+                                    <type>3</type>
+                                    <params><![CDATA[ ]]></params>
                                 </step>
                             </preprocessing>
                             <jmx_endpoint/>
